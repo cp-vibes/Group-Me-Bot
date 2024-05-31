@@ -1,0 +1,35 @@
+import random
+import requests
+
+# List of playful trash talk phrases
+trash_talk_phrases = [
+    "Looks like my team's on the rise, while yours is just a fantasy.",
+    "Even autodraft would make better picks than you!",
+    "I'm not saying you're a bad fantasy manager, but my bench outscored your starters.",
+    "Hope you enjoyed your brief stay at the top, because it's all downhill from here!",
+    "Your team's performance is like a bye week – no one shows up.",
+    "I would trash talk you, but your lineup is doing it for me."
+]
+
+# Function to post a message to GroupMe
+def post_to_groupme(bot_id, message):
+    url = 'https://api.groupme.com/v3/bots/post'
+    data = {
+        'bot_id': bot_id,
+        'text': message
+    }
+    response = requests.post(url, json=data)
+    return response.ok
+
+# Randomly select a trash talk phrase
+random_phrase = random.choice(trash_talk_phrases)
+
+# Your GroupMe Bot ID
+bot_id = 'YOUR_GROUPME_BOT_ID'
+
+# Post the message
+success = post_to_groupme(bot_id, random_phrase)
+if success:
+    print("Trash talk posted successfully!")
+else:
+    print("Failed to post trash talk.")
